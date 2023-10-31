@@ -70,7 +70,7 @@ export class FileInstance {
                     'api-key': this.credentials.apiKey
                 },
                 data: {
-                    filename: fileName
+                    file: fileName
                 }
             })
             return request.data.response
