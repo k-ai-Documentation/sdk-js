@@ -11,6 +11,7 @@ export interface SearchResult {
     query: string,
     answer: string,
     confidentRate: number,
+    gotAnswer: boolean,
     documents: DocumentResult[]
 }
 
