@@ -1,5 +1,5 @@
 import axios from "axios";
-import { KaiStudioCredentials } from "..";
+import { type KaiStudioCredentials } from "..";
 
 export interface DocumentResult {
     id: string,
