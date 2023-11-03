@@ -12,6 +12,36 @@ export class ManageInstance {
         this.credentials = credentials
     }
 
+    public async getGlobalHealth(): Promise<any> {
+        try {
+            const request = await axios({
+                url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/global/health`,
+                method: 'GET',
+                headers: {
+                    'api-key': this.credentials.apiKey
+                }
+            })
+            return request.data
+        } catch(e) {
+            throw e
+        }
+    }
+
+    public async isApiAlive(): Promise<any> {
+        try {
+            const request = await axios({
+                url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/health`,
+                method: 'GET',
+                headers: {
+                    'api-key': this.credentials.apiKey
+                }
+            })
+            return request.data
+        } catch(e) {
+            throw e
+        }
+    }
+
     public async updateName(name: string): Promise<boolean> {
         try {
             const request = await axios({
