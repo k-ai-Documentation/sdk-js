@@ -41,6 +41,23 @@ export class ManageInstance {
             throw e
         }
     }
+    
+    public async generateNewApiKey(): Promise<boolean> {
+        try {
+            const request = await axios({
+                url: 'https://ima.kai-studio.ai/generate-new-apikey',
+                method: 'POST',
+                headers: {
+                    'organization-id': this.credentials.organizationId,
+                    'instance-id': this.credentials.instanceId,
+                    'api-key': this.credentials.apiKey
+                }
+            })
+            return request.data.response
+        } catch(e) {
+            throw e
+        }
+    }
 
     public async updateName(name: string): Promise<boolean> {
         try {
