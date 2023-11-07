@@ -22,6 +22,10 @@ export class KaiStudio {
         this._manageInstance = new ManageInstance(this.credentials)
     }
 
+    public getCredentials(): KaiStudioCredentials {
+        return this.credentials
+    }
+
     public search(): Search {
         return this._search
     }
