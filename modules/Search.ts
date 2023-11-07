@@ -90,4 +90,34 @@ export class Search {
         }
     }
 
+    public async countDoneRequests(): Promise<number> {
+        try {
+            const request = await axios({
+                url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/search/stats/count-search`,
+                method: 'POST',
+                headers: {
+                    'api-key': this.credentials.apiKey
+                }
+            })
+            return request.data.response
+        } catch(e) {
+            throw e
+        }
+    }
+
+    public async countAnsweredDoneRequests(): Promise<number> {
+        try {
+            const request = await axios({
+                url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/search/stats/count-answered-search`,
+                method: 'POST',
+                headers: {
+                    'api-key': this.credentials.apiKey
+                }
+            })
+            return request.data.response
+        } catch(e) {
+            throw e
+        }
+    }
+
 }
