@@ -113,4 +113,22 @@ export class ManageInstance {
         }
     }
 
+    public async addKb(type: string, options: any): Promise<boolean> {
+        try {
+            const request = await axios({
+                url: 'https://ima.kai-studio.ai/add-kb',
+                method: 'POST',
+                headers: {
+                    'organization-id': this.credentials.organizationId,
+                    'instance-id': this.credentials.instanceId,
+                    'api-key': this.credentials.apiKey
+                },
+                data: { type, options }
+            })
+            return request.data.response
+        } catch(e) {
+            throw e
+        }
+    }
+
 }
