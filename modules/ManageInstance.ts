@@ -131,4 +131,40 @@ export class ManageInstance {
         }
     }
 
+    public async updateKb(id: string, options: any): Promise<boolean> {
+        try {
+            const request = await axios({
+                url: 'https://ima.kai-studio.ai/update-kb',
+                method: 'POST',
+                headers: {
+                    'organization-id': this.credentials.organizationId,
+                    'instance-id': this.credentials.instanceId,
+                    'api-key': this.credentials.apiKey
+                },
+                data: { id, options }
+            })
+            return request.data.response
+        } catch(e) {
+            throw e
+        }
+    }
+
+    public async removeKb(id: string): Promise<boolean> {
+        try {
+            const request = await axios({
+                url: 'https://ima.kai-studio.ai/remove-kb',
+                method: 'POST',
+                headers: {
+                    'organization-id': this.credentials.organizationId,
+                    'instance-id': this.credentials.instanceId,
+                    'api-key': this.credentials.apiKey
+                },
+                data: { id }
+            })
+            return request.data.response
+        } catch(e) {
+            throw e
+        }
+    }
+
 }
