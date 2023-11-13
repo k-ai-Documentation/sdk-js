@@ -75,13 +75,16 @@ export class Search {
         }
     }
 
-    public async getDocsIds(): Promise<string[]> {
+    public async getDocsIds(docsIds: string[]): Promise<string[]> {
         try {
             const request = await axios({
                 url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/search/docs`,
                 method: 'POST',
                 headers: {
                     'api-key': this.credentials.apiKey
+                },
+                data: {
+                    'docsIds': docsIds
                 }
             })
             return request.data.response
