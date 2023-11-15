@@ -1,6 +1,10 @@
 import {KaiStudio, KaiStudioCredentials} from "./index";
 
-let fs = require('fs');
+import axios from "axios";
+
+let fs = require('fs')
+let path = require('path')
+import FormData = require('form-data');
 
 export class Credentials implements KaiStudioCredentials {
     public organizationId: string;
@@ -24,6 +28,26 @@ let fileInstance = kaiStudio.fileInstance()
 let manageInstance = kaiStudio.manageInstance()
 let search = kaiStudio.search()
 let auditInstance = kaiStudio.auditInstance()
+
+let form = new FormData();
+form.append("files", fs.createReadStream(path.resolve(__dirname, "./files/kai-studio v1.1.pdf")));
+
+axios.post('https://fma.kai-studio.ai/upload-file', form, {
+    headers: {
+        'organization-id': "163084b1-5e4c-49c5-b7ec-e41ccca65642",
+        'instance-id': "b6b33cc0-8fe4-4829-bf27-2df41d3f74a9",
+        'api-key': "yBHhI6yW9vYG+4bi4VwanQVvyk6UYuDtWcZSn1oHT9Q=",
+        "Content-Type": "multipart/form-data",
+    }
+}).then(response => {
+    console.log("UPLOAD FILE")
+    console.log(response.data.response)
+    fileInstance.removeFile("kai-studio v1.1.pdf").then(removeResponse => {
+        console.log("DELETE FILE")
+        console.log(removeResponse)
+    })
+})
+
 fileInstance.listFiles().then(response => {
     console.log("LIST FILES:")
     console.log(response)
