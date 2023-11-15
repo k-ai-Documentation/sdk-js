@@ -12,7 +12,8 @@ export interface SearchResult {
     answer: string,
     confidentRate: number,
     gotAnswer: boolean,
-    documents: DocumentResult[]
+    documents: DocumentResult[],
+    followingQuestions: string[]
 }
 
 export class Search {
