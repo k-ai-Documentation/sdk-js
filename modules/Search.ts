@@ -123,4 +123,24 @@ export class Search {
         }
     }
 
+
+    public async generateFollowingQuestion(previousAnswer: string, comment: string): Promise<number> {
+        try {
+            const request = await axios({
+                url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/search/generate-following-question`,
+                method: 'POST',
+                headers: {
+                    'api-key': this.credentials.apiKey
+                },
+                data: {
+                    "previousAnswer": previousAnswer,
+                    "comment": comment
+                }
+            })
+            return request.data.response
+        } catch(e) {
+            throw e
+        }
+    }
+
 }
