@@ -62,6 +62,21 @@ export class Search {
         }
     }
 
+    public async countAnalyzedDocuments(): Promise<number> {
+        try {
+            const request = await axios({
+                url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/audit/stats/count-documents`,
+                method: 'POST',
+                headers: {
+                    'api-key': this.credentials.apiKey
+                }
+            })
+            return request.data.response
+        } catch(e) {
+            throw e
+        }
+    }
+
     public async getDocSignature(docId: string): Promise<any> {
         try {
             const request = await axios({
