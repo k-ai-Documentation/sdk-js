@@ -10,6 +10,7 @@ export interface DocumentResult {
 export interface SearchResult {
     query: string,
     answer: string,
+    reason: string,
     confidentRate: number,
     gotAnswer: boolean,
     documents: DocumentResult[],
