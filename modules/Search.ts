@@ -7,6 +7,12 @@ export interface DocumentResult {
     url: string
 }
 
+export interface SearchLog {
+    id: number,
+    query: string,
+    answer: string,
+}
+
 export interface SearchResult {
     query: string,
     answer: string,
@@ -153,6 +159,22 @@ export class Search {
                     "previousAnswer": previousAnswer,
                     "comment": comment
                 }
+            })
+            return request.data.response
+        } catch(e) {
+            throw e
+        }
+    }
+
+    public async listQuestionsAsked(offset: number = 0, limit: number = 20): Promise<SearchLog[]> {
+        try {
+            const request = await axios({
+                url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/search/stats/list-search`,
+                method: 'POST',
+                headers: {
+                    'api-key': this.credentials.apiKey
+                },
+                data: { offset, limit }
             })
             return request.data.response
         } catch(e) {
