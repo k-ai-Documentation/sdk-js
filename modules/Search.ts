@@ -10,7 +10,8 @@ export interface DocumentResult {
 export interface SearchLog {
     id: number,
     query: string,
-    answer: string,
+    answer_text: string,
+    user_id: string
 }
 
 export interface SearchResult {
