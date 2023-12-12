@@ -9,7 +9,7 @@ export class AuditInstance {
         this.credentials = credentials
     }
 
-    public async getTopic(topic: string): Promise<boolean> {
+    public async getTopic(topic: string): Promise<any> {
         try {
             const request = await axios({
                 url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/audit/topic`,
@@ -27,7 +27,7 @@ export class AuditInstance {
         }
     }
 
-    public async getKbs(): Promise<boolean> {
+    public async getKbs(): Promise<any[]> {
         try {
             const request = await axios({
                 url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/audit/kbs`,
@@ -42,7 +42,7 @@ export class AuditInstance {
         }
     }
 
-    public async getDocuments(): Promise<boolean> {
+    public async getDocuments(): Promise<any[]> {
         try {
             const request = await axios({
                 url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/audit/documents`,
@@ -96,7 +96,7 @@ export class AuditInstance {
         }
     }
 
-    public async listAuditQuestions(): Promise<boolean> {
+    public async listAuditQuestions(): Promise<any[]> {
         try {
             const request = await axios({
                 url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/audit/list-audit-questions`,
@@ -141,7 +141,7 @@ export class AuditInstance {
         }
     }
 
-    public async listTopics(): Promise<boolean> {
+    public async listTopics(): Promise<any[]> {
         try {
             const request = await axios({
                 url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/audit/list/topics`,
@@ -156,7 +156,7 @@ export class AuditInstance {
         }
     }
 
-    public async getSubtopic(subtopic: string): Promise<boolean> {
+    public async getSubtopic(subtopic: string): Promise<any> {
         try {
             const request = await axios({
                 url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/audit/subtopic`,
@@ -174,7 +174,7 @@ export class AuditInstance {
         }
     }
 
-    public async countTopics(): Promise<boolean> {
+    public async countTopics(): Promise<number> {
         try {
             const request = await axios({
                 url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/audit/stats/count-topics`,
@@ -189,7 +189,7 @@ export class AuditInstance {
         }
     }
 
-    public async countSubtopics(): Promise<boolean> {
+    public async countSubtopics(): Promise<number> {
         try {
             const request = await axios({
                 url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/audit/stats/count-subtopics`,
@@ -204,7 +204,7 @@ export class AuditInstance {
         }
     }
 
-    public async countDocuments(): Promise<boolean> {
+    public async countDocuments(): Promise<number> {
         try {
             const request = await axios({
                 url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/audit/stats/count-documents`,
@@ -219,7 +219,7 @@ export class AuditInstance {
         }
     }
 
-    public async countAuditQuestions(): Promise<boolean> {
+    public async countAuditQuestions(): Promise<number> {
         try {
             const request = await axios({
                 url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/audit/stats/count-audit-questions`,
@@ -234,7 +234,7 @@ export class AuditInstance {
         }
     }
 
-    public async countValidatedAuditQuestions(): Promise<boolean> {
+    public async countValidatedAuditQuestions(): Promise<number> {
         try {
             const request = await axios({
                 url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/audit/stats/count-validated-audit-questions`,
