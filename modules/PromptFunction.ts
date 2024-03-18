@@ -93,7 +93,7 @@ export class PromptFunction {
         }
     }
 
-    public async getPromptFunction(promptFunctionId: string): Promise<boolean> {
+    public async getPromptFunction(promptFunctionId: string): Promise<PromptFunction> {
         try {
             const request = await axios({
                 url: `${this.baseUrl}/prompt-function/` + promptFunctionId,
@@ -126,9 +126,9 @@ export class PromptFunction {
     }
 
 
-    public async getPromptFunctions(limit: number, offset: number): Promise<boolean> {
+    public async getPromptFunctions(limit: number, offset: number): Promise<PromptFunction[]> {
         try {
-            let queryLimit = limit ?? 10
+            let queryLimit = limit ?? 20
             let queryOffset = offset ?? 0
             const request = await axios({
                 url: `${this.baseUrl}/prompt-functions?limit=${queryLimit}&offset=${queryOffset}`,
@@ -200,12 +200,12 @@ export class PromptFunction {
         }
     }
 
-    public async getDatasetsList(limit: number, offset: number): Promise<boolean> {
+    public async getDatasetsList(limit: number, offset: number, promptFunctionId: string): Promise<boolean> {
         try {
-            let queryLimit = limit ?? 10
+            let queryLimit = limit ?? 20
             let queryOffset = offset ?? 0
             const request = await axios({
-                url: `${this.baseUrl}/datasets?limit=${queryLimit}&offset=${queryOffset}`,
+                url: `${this.baseUrl}/datasets?limit=${queryLimit}&offset=${queryOffset}&promptFunctionId=${promptFunctionId}`,
                 method: 'GET',
                 headers: {
                     'organization-id': this.credentials.organizationId,
