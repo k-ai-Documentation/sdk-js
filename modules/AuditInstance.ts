@@ -141,13 +141,17 @@ export class AuditInstance {
         }
     }
 
-    public async listTopics(): Promise<any[]> {
+    public async listTopics(limit: number, offset: number): Promise<any[]> {
         try {
             const request = await axios({
                 url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/audit/list/topics`,
                 method: 'POST',
                 headers: {
                     'api-key': this.credentials.apiKey
+                },
+                data: {
+                    limit: limit,
+                    offset: offset
                 }
             })
             return request.data.response

@@ -2,7 +2,6 @@ import {FileInstance} from "./modules/FileInstance";
 import {ManageInstance} from "./modules/ManageInstance";
 import {Search} from "./modules/Search";
 import {AuditInstance} from "./modules/AuditInstance";
-import {PromptFunction} from "./modules/PromptFunction";
 
 export interface KaiStudioCredentials {
     organizationId: string,
@@ -17,7 +16,6 @@ export class KaiStudio {
     private readonly _fileInstance: FileInstance;
     private readonly _manageInstance: ManageInstance;
     private readonly _auditInstance: AuditInstance;
-    private readonly _promptFunctionInstance: PromptFunction;
 
     constructor(credentials: KaiStudioCredentials) {
         this.credentials = credentials
@@ -25,7 +23,6 @@ export class KaiStudio {
         this._fileInstance = new FileInstance(this.credentials)
         this._manageInstance = new ManageInstance(this.credentials)
         this._auditInstance = new AuditInstance(this.credentials)
-        this._promptFunctionInstance = new PromptFunction(this.credentials)
     }
 
     public getCredentials(): KaiStudioCredentials {
@@ -47,10 +44,5 @@ export class KaiStudio {
     public auditInstance(): AuditInstance {
         return this._auditInstance
     }
-
-    public promptFunctionInstance(): PromptFunction {
-        return this._promptFunctionInstance
-    }
-
 }
 
