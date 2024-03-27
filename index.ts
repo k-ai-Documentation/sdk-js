@@ -18,7 +18,6 @@ export class KaiStudio {
     private readonly _auditInstance: AuditInstance;
 
     constructor(credentials: KaiStudioCredentials) {
-        console.log(credentials)
         this.credentials = credentials
         this._search = new Search(this.credentials)
         this._fileInstance = new FileInstance(this.credentials)
