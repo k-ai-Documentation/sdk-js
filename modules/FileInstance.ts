@@ -36,6 +36,26 @@ export class FileInstance {
         }
     }
 
+    public async downloadFile(fileName: string): Promise<KaiStudioFileSignature[]> {
+        try {
+            const request = await axios({
+                url: 'http://localhost:3000/download-file',
+                method: 'POST',
+                headers: {
+                    'organization-id': this.credentials.organizationId,
+                    'instance-id': this.credentials.instanceId,
+                    'api-key': this.credentials.apiKey
+                },
+                data: {
+                    fileName: fileName
+                }
+            })
+            return request.data.response
+        } catch(e) {
+            throw e
+        }
+    }
+
     public async uploadFiles(files: File[]): Promise<KaiStudioFileUploadResponse[]> {
         if(files.length == 0) {
             return []
