@@ -22,7 +22,7 @@ export class FileInstance {
     public async listFiles(): Promise<KaiStudioFileSignature[]> {
         try {
             const request = await axios({
-                url: 'http://localhost:3000/list-files',
+                url: 'https://fma.kai-studio.ai/list-files',
                 method: 'POST',
                 headers: {
                     'organization-id': this.credentials.organizationId,
@@ -39,7 +39,7 @@ export class FileInstance {
     public async downloadFile(fileName: string): Promise<KaiStudioFileSignature[]> {
         try {
             const request = await axios({
-                url: 'http://localhost:3000/download-file',
+                url: 'https://fma.kai-studio.ai/download-file',
                 method: 'POST',
                 headers: {
                     'organization-id': this.credentials.organizationId,
