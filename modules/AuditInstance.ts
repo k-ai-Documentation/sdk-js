@@ -144,7 +144,7 @@ export class AuditInstance {
     public async listTopics(limit: number, offset: number): Promise<any[]> {
         try {
             const request = await axios({
-                url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/audit/list/topics`,
+                url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/thematic/list/topics`,
                 method: 'POST',
                 headers: {
                     'api-key': this.credentials.apiKey
@@ -211,7 +211,7 @@ export class AuditInstance {
     public async countDocuments(): Promise<number> {
         try {
             const request = await axios({
-                url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/audit/stats/count-documents`,
+                url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/thematic/stats/count-documents`,
                 method: 'POST',
                 headers: {
                     'api-key': this.credentials.apiKey
