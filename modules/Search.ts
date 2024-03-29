@@ -72,7 +72,7 @@ export class Search {
     public async countAnalyzedDocuments(): Promise<number> {
         try {
             const request = await axios({
-                url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/audit/stats/count-documents`,
+                url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/thematic/stats/count-documents`,
                 method: 'POST',
                 headers: {
                     'api-key': this.credentials.apiKey
