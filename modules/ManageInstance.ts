@@ -131,7 +131,7 @@ export class ManageInstance {
         }
     }
 
-    public async setPlayground(typeList: []): Promise<boolean> {
+    public async setPlayground(typeList: string[]): Promise<boolean> {
         try {
             const request = await axios({
                 url: 'https://ima.kai-studio.ai/set-playground',
