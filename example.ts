@@ -27,7 +27,7 @@ let kaiStudio = new KaiStudio(credentials)
 let fileInstance = kaiStudio.fileInstance()
 let manageInstance = kaiStudio.manageInstance()
 let search = kaiStudio.search()
-let auditInstance = kaiStudio.auditInstance()
+let thematic = kaiStudio.thematic()
 
 let form = new FormData();
 form.append("files", fs.createReadStream(path.resolve(__dirname, "./files/kai-studio v1.1.pdf")));
@@ -94,62 +94,62 @@ search.countAnsweredDoneRequests().then(response => {
     console.log(response)
 })
 
-auditInstance.getTopic("france.tv application").then(response => {
+thematic.getTopic("france.tv application").then(response => {
     console.log("GET TOPIC:")
     console.log(response)
 })
 
-auditInstance.getKbs().then(response => {
+thematic.getKbs().then(response => {
     console.log("GET KBS:")
     console.log(response)
 })
 
-auditInstance.getDocuments().then(response => {
+thematic.getDocuments().then(response => {
     console.log("GET DOCUMENTS:")
     console.log(response)
 })
 
-auditInstance.listAuditQuestions().then(response => {
+thematic.listAuditQuestions().then(response => {
     console.log("LIST AUDIT QUESTIONS:")
     console.log(response)
 })
 
-auditInstance.getTestRunningState().then(response => {
+thematic.getTestRunningState().then(response => {
     console.log("GET TEST RUNNING STATE:")
     console.log(response)
 })
 
-auditInstance.listTopics().then(response => {
+thematic.listTopics(20, 0).then(response => {
     console.log("LIST TOPICS:")
     console.log(response)
 })
 
-auditInstance.getSubtopic("visio-chat").then(response => {
+thematic.getSubtopic("visio-chat").then(response => {
     console.log("GET SUBTOPIC:")
     console.log(response)
 })
 
-auditInstance.countTopics().then(response => {
+thematic.countTopics().then(response => {
     console.log("COUNT TOPICS:")
     console.log(response)
 })
 
-auditInstance.countSubtopics().then(response => {
+thematic.countSubtopics().then(response => {
     console.log("COUNT SUBTOPICS:")
     console.log(response)
 })
 
-auditInstance.countDocuments().then(response => {
+thematic.countDocuments().then(response => {
     console.log("COUNT DOCUMENTS:")
     console.log(response)
 })
 
-auditInstance.countAuditQuestions().then(response => {
+thematic.countAuditQuestions().then(response => {
     console.log("COUNT AUDIT QUESTIONS:")
     console.log(response)
 })
 
-auditInstance.countValidatedAuditQuestions().then(response => {
+thematic.countValidatedAuditQuestions().then(response => {
     console.log("COUNT VALIDATED AUDIT QUESTIONS:")
     console.log(response)
 })

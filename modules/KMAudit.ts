@@ -2,7 +2,7 @@ import type {KaiStudioCredentials} from "../index";
 import axios from "axios";
 import {SearchResult} from "./Search";
 
-export class Search {
+export class KMAudit {
 
     private credentials: KaiStudioCredentials;
 

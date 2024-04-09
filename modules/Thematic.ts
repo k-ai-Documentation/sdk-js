@@ -1,7 +1,7 @@
 import axios from "axios";
 import { type KaiStudioCredentials } from "..";
 
-export class AuditInstance {
+export class Thematic {
 
     private credentials: KaiStudioCredentials;
 

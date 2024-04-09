@@ -1,7 +1,8 @@
 import {FileInstance} from "./modules/FileInstance";
 import {ManageInstance} from "./modules/ManageInstance";
 import {Search} from "./modules/Search";
-import {AuditInstance} from "./modules/AuditInstance";
+import {Thematic} from "./modules/Thematic";
+import {KMAudit} from "./modules/KMAudit";
 
 export interface KaiStudioCredentials {
     organizationId: string,
@@ -15,14 +16,15 @@ export class KaiStudio {
     private readonly _search: Search;
     private readonly _fileInstance: FileInstance;
     private readonly _manageInstance: ManageInstance;
-    private readonly _auditInstance: AuditInstance;
+    private readonly _thematic: Thematic;
+    private readonly _auditInstance: KMAudit;
 
     constructor(credentials: KaiStudioCredentials) {
         this.credentials = credentials
         this._search = new Search(this.credentials)
         this._fileInstance = new FileInstance(this.credentials)
         this._manageInstance = new ManageInstance(this.credentials)
-        this._auditInstance = new AuditInstance(this.credentials)
+        this._thematic = new Thematic(this.credentials)
     }
 
     public getCredentials(): KaiStudioCredentials {
@@ -41,7 +43,11 @@ export class KaiStudio {
         return this._manageInstance
     }
 
-    public auditInstance(): AuditInstance {
+    public thematic(): Thematic {
+        return this._thematic
+    }
+
+    public auditInstance(): KMAudit {
         return this._auditInstance
     }
 }
