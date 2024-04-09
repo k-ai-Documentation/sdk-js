@@ -18,10 +18,11 @@ export class Credentials implements KaiStudioCredentials {
     }
 }
 
+const organizationId = "your organization id"
+const instanceId = "your instance id"
+const apiKey = "your api key"
 
-let credentials = new Credentials("163084b1-5e4c-49c5-b7ec-e41ccca65642",
-    "b6b33cc0-8fe4-4829-bf27-2df41d3f74a9",
-    "yBHhI6yW9vYG+4bi4VwanQVvyk6UYuDtWcZSn1oHT9Q=")
+let credentials = new Credentials(organizationId, instanceId, apiKey)
 
 let kaiStudio = new KaiStudio(credentials)
 let fileInstance = kaiStudio.fileInstance()
@@ -34,9 +35,9 @@ form.append("files", fs.createReadStream(path.resolve(__dirname, "./files/kai-st
 
 axios.post('https://fma.kai-studio.ai/upload-file', form, {
     headers: {
-        'organization-id': "163084b1-5e4c-49c5-b7ec-e41ccca65642",
-        'instance-id': "b6b33cc0-8fe4-4829-bf27-2df41d3f74a9",
-        'api-key': "yBHhI6yW9vYG+4bi4VwanQVvyk6UYuDtWcZSn1oHT9Q=",
+        'organization-id': organizationId,
+        'instance-id': instanceId,
+        'api-key': apiKey,
         "Content-Type": "multipart/form-data",
     }
 }).then(response => {
