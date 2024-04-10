@@ -18,26 +18,25 @@ export class Credentials implements KaiStudioCredentials {
     }
 }
 
-const organizationId = "your organization id"
-const instanceId = "your instance id"
-const apiKey = "your api key"
-
-let credentials = new Credentials(organizationId, instanceId, apiKey)
+let credentials = new Credentials("163084b1-5e4c-49c5-b7ec-e41ccca65642",
+    "b6b33cc0-8fe4-4829-bf27-2df41d3f74a9",
+    "yBHhI6yW9vYG+4bi4VwanQVvyk6UYuDtWcZSn1oHT9Q=")
 
 let kaiStudio = new KaiStudio(credentials)
 let fileInstance = kaiStudio.fileInstance()
 let manageInstance = kaiStudio.manageInstance()
 let search = kaiStudio.search()
 let auditInstance = kaiStudio.auditInstance()
+let thematic = kaiStudio.thematic()
 
 let form = new FormData();
 form.append("files", fs.createReadStream(path.resolve(__dirname, "./files/kai-studio v1.1.pdf")));
 
 axios.post('https://fma.kai-studio.ai/upload-file', form, {
     headers: {
-        'organization-id': organizationId,
-        'instance-id': instanceId,
-        'api-key': apiKey,
+        'organization-id': "163084b1-5e4c-49c5-b7ec-e41ccca65642",
+        'instance-id': "b6b33cc0-8fe4-4829-bf27-2df41d3f74a9",
+        'api-key': "yBHhI6yW9vYG+4bi4VwanQVvyk6UYuDtWcZSn1oHT9Q=",
         "Content-Type": "multipart/form-data",
     }
 }).then(response => {
@@ -74,13 +73,13 @@ search.getRelatedDocuments("TV?").then(response => {
     console.log(response)
 })
 
-search.getDocSignature("Azure Blob Storage::your instance id::Contacter FranceTV.docx").then(response => {
+search.getDocSignature("Azure Blob Storage::b6b33cc0-8fe4-4829-bf27-2df41d3f74a9::Contacter FranceTV.docx").then(response => {
     console.log("GET DOC SIGNATURE:")
     console.log(response)
 })
 
-search.getDocsIds(["Azure Blob Storage::your instance id::Contacter FranceTV.docx",
-    "Azure Blob Storage::your instance id::Histoire FTV.docx"]).then(response => {
+search.getDocsIds(["Azure Blob Storage::b6b33cc0-8fe4-4829-bf27-2df41d3f74a9::Contacter FranceTV.docx",
+    "Azure Blob Storage::b6b33cc0-8fe4-4829-bf27-2df41d3f74a9::Histoire FTV.docx"]).then(response => {
     console.log("GET DOCS BY IDS:")
     console.log(response)
 })
@@ -95,62 +94,64 @@ search.countAnsweredDoneRequests().then(response => {
     console.log(response)
 })
 
-auditInstance.getTopic("france.tv application").then(response => {
+thematic.getTopic("france.tv application").then(response => {
     console.log("GET TOPIC:")
     console.log(response)
 })
-
-auditInstance.getKbs().then(response => {
+    
+thematic.getKbs().then(response => {
     console.log("GET KBS:")
     console.log(response)
 })
-
-auditInstance.getDocuments().then(response => {
+    
+thematic.getDocuments().then(response => {
     console.log("GET DOCUMENTS:")
     console.log(response)
 })
 
-auditInstance.listAuditQuestions().then(response => {
+thematic.listAuditQuestions().then(response => {
     console.log("LIST AUDIT QUESTIONS:")
     console.log(response)
 })
 
-auditInstance.getTestRunningState().then(response => {
+thematic.getTestRunningState().then(response => {
     console.log("GET TEST RUNNING STATE:")
     console.log(response)
 })
 
-auditInstance.listTopics().then(response => {
+
+thematic.listTopics(20, 0).then(response => {
     console.log("LIST TOPICS:")
     console.log(response)
 })
 
-auditInstance.getSubtopic("visio-chat").then(response => {
+
+thematic.getSubtopic("visio-chat").then(response => {
     console.log("GET SUBTOPIC:")
     console.log(response)
 })
 
-auditInstance.countTopics().then(response => {
+thematic.countTopics().then(response => {
     console.log("COUNT TOPICS:")
     console.log(response)
 })
 
-auditInstance.countSubtopics().then(response => {
+thematic.countSubtopics().then(response => {
     console.log("COUNT SUBTOPICS:")
     console.log(response)
 })
 
-auditInstance.countDocuments().then(response => {
+thematic.countDocuments().then(response => {
     console.log("COUNT DOCUMENTS:")
     console.log(response)
 })
 
-auditInstance.countAuditQuestions().then(response => {
+thematic.countAuditQuestions().then(response => {
     console.log("COUNT AUDIT QUESTIONS:")
     console.log(response)
 })
 
-auditInstance.countValidatedAuditQuestions().then(response => {
+thematic.countValidatedAuditQuestions().then(response => {
     console.log("COUNT VALIDATED AUDIT QUESTIONS:")
     console.log(response)
 })

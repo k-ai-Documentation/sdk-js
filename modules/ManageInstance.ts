@@ -1,8 +1,5 @@
 import axios from "axios";
-import { type KaiStudioCredentials } from "..";
-
-
-
+import {type KaiStudioCredentials} from "..";
 
 export class ManageInstance {
 
@@ -22,7 +19,7 @@ export class ManageInstance {
                 }
             })
             return request.data
-        } catch(e) {
+        } catch (e) {
             throw e
         }
     }
@@ -37,11 +34,11 @@ export class ManageInstance {
                 }
             })
             return request.data
-        } catch(e) {
+        } catch (e) {
             throw e
         }
     }
-    
+
     public async generateNewApiKey(): Promise<boolean> {
         try {
             const request = await axios({
@@ -54,7 +51,7 @@ export class ManageInstance {
                 }
             })
             return request.data.response
-        } catch(e) {
+        } catch (e) {
             throw e
         }
     }
@@ -74,7 +71,7 @@ export class ManageInstance {
                 }
             })
             return request.data.response
-        } catch(e) {
+        } catch (e) {
             throw e
         }
     }
@@ -91,7 +88,7 @@ export class ManageInstance {
                 }
             })
             return request.data.response
-        } catch(e) {
+        } catch (e) {
             throw e
         }
     }
@@ -108,7 +105,7 @@ export class ManageInstance {
                 }
             })
             return request.data.response
-        } catch(e) {
+        } catch (e) {
             throw e
         }
     }
@@ -123,10 +120,28 @@ export class ManageInstance {
                     'instance-id': this.credentials.instanceId,
                     'api-key': this.credentials.apiKey
                 },
-                data: { type, options }
+                data: {type, options}
             })
             return request.data.response
-        } catch(e) {
+        } catch (e) {
+            throw e
+        }
+    }
+
+    public async setPlayground(typeList: string[]): Promise<boolean> {
+        try {
+            const request = await axios({
+                url: 'https://ima.kai-studio.ai/set-playground',
+                method: 'POST',
+                headers: {
+                    'organization-id': this.credentials.organizationId,
+                    'instance-id': this.credentials.instanceId,
+                    'api-key': this.credentials.apiKey
+                },
+                data: {typeList}
+            })
+            return request.data.response
+        } catch (e) {
             throw e
         }
     }
@@ -141,10 +156,10 @@ export class ManageInstance {
                     'instance-id': this.credentials.instanceId,
                     'api-key': this.credentials.apiKey
                 },
-                data: { id, options }
+                data: {id, options}
             })
             return request.data.response
-        } catch(e) {
+        } catch (e) {
             throw e
         }
     }
@@ -159,12 +174,11 @@ export class ManageInstance {
                     'instance-id': this.credentials.instanceId,
                     'api-key': this.credentials.apiKey
                 },
-                data: { id }
+                data: {id}
             })
             return request.data.response
-        } catch(e) {
+        } catch (e) {
             throw e
         }
     }
-
 }
