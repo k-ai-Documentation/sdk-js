@@ -18,9 +18,9 @@ export class Credentials implements KaiStudioCredentials {
     }
 }
 
-let credentials = new Credentials("163084b1-5e4c-49c5-b7ec-e41ccca65642",
-    "b6b33cc0-8fe4-4829-bf27-2df41d3f74a9",
-    "yBHhI6yW9vYG+4bi4VwanQVvyk6UYuDtWcZSn1oHT9Q=")
+let credentials = new Credentials("your organization id",
+    "your instance id",
+    "your api key")
 
 let kaiStudio = new KaiStudio(credentials)
 let fileInstance = kaiStudio.fileInstance()
@@ -30,19 +30,19 @@ let auditInstance = kaiStudio.auditInstance()
 let thematic = kaiStudio.thematic()
 
 let form = new FormData();
-form.append("files", fs.createReadStream(path.resolve(__dirname, "./files/kai-studio v1.1.pdf")));
+form.append("files", fs.createReadStream(path.resolve(__dirname, "your file path")));
 
 axios.post('https://fma.kai-studio.ai/upload-file', form, {
     headers: {
-        'organization-id': "163084b1-5e4c-49c5-b7ec-e41ccca65642",
-        'instance-id': "b6b33cc0-8fe4-4829-bf27-2df41d3f74a9",
-        'api-key': "yBHhI6yW9vYG+4bi4VwanQVvyk6UYuDtWcZSn1oHT9Q=",
+        'organization-id': credentials.organizationId,
+        'instance-id': credentials.instanceId,
+        'api-key': credentials.apiKey,
         "Content-Type": "multipart/form-data",
     }
 }).then(response => {
     console.log("UPLOAD FILE")
     console.log(response.data.response)
-    fileInstance.removeFile("kai-studio v1.1.pdf").then(removeResponse => {
+    fileInstance.removeFile("your file name").then(removeResponse => {
         console.log("DELETE FILE")
         console.log(removeResponse)
     })
@@ -73,12 +73,12 @@ search.getRelatedDocuments("TV?").then(response => {
     console.log(response)
 })
 
-search.getDocSignature("Azure Blob Storage::b6b33cc0-8fe4-4829-bf27-2df41d3f74a9::Contacter FranceTV.docx").then(response => {
+search.getDocSignature("Azure Blob Storage::{{blob storage id}}::Contacter FranceTV.docx").then(response => {
     console.log("GET DOC SIGNATURE:")
     console.log(response)
 })
 
-search.getDocsIds(["Azure Blob Storage::b6b33cc0-8fe4-4829-bf27-2df41d3f74a9::Contacter FranceTV.docx",
+search.getDocsIds(["Azure Blob Storage::{{blob storage id}}::Contacter FranceTV.docx",
     "Azure Blob Storage::b6b33cc0-8fe4-4829-bf27-2df41d3f74a9::Histoire FTV.docx"]).then(response => {
     console.log("GET DOCS BY IDS:")
     console.log(response)
@@ -98,12 +98,12 @@ thematic.getTopic("france.tv application").then(response => {
     console.log("GET TOPIC:")
     console.log(response)
 })
-    
+
 thematic.getKbs().then(response => {
     console.log("GET KBS:")
     console.log(response)
 })
-    
+
 thematic.getDocuments().then(response => {
     console.log("GET DOCUMENTS:")
     console.log(response)
