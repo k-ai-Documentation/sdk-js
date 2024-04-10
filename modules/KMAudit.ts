@@ -69,7 +69,7 @@ export class KMAudit {
     public async setDuplicatedInformationManaged(id: number): Promise<SearchResult> {
         try {
             const request = await axios({
-                url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/audit/conflict-information/set-managed`,
+                url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/audit/duplicated-information/set-managed`,
                 method: 'POST',
                 headers: {
                     'api-key': this.credentials.apiKey
