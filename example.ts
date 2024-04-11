@@ -79,7 +79,7 @@ search.getDocSignature("Azure Blob Storage::{{blob storage id}}::Contacter Franc
 })
 
 search.getDocsIds(["Azure Blob Storage::{{blob storage id}}::Contacter FranceTV.docx",
-    "Azure Blob Storage::b6b33cc0-8fe4-4829-bf27-2df41d3f74a9::Histoire FTV.docx"]).then(response => {
+    "Azure Blob Storage::your instance id::Histoire FTV.docx"]).then(response => {
     console.log("GET DOCS BY IDS:")
     console.log(response)
 })
