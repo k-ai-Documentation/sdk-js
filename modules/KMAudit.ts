@@ -1,6 +1,5 @@
 import type {KaiStudioCredentials} from "../index";
 import axios from "axios";
-import {SearchResult} from "./Search";
 
 export class KMAudit {
 
@@ -10,7 +9,7 @@ export class KMAudit {
         this.credentials = credentials
     }
 
-    public async getConflictInformation(limit: number, offset: number): Promise<SearchResult> {
+    public async getConflictInformation(limit: number, offset: number): Promise<any> {
         try {
             const request = await axios({
                 url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/audit/conflict-informations`,
@@ -29,7 +28,7 @@ export class KMAudit {
         }
     }
 
-    public async getDuplicatedInformation(limit: number, offset: number): Promise<SearchResult> {
+    public async getDuplicatedInformation(limit: number, offset: number): Promise<any> {
         try {
             const request = await axios({
                 url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/audit/duplicated-informations`,
@@ -48,7 +47,7 @@ export class KMAudit {
         }
     }
 
-    public async setConflictManaged(id: number): Promise<SearchResult> {
+    public async setConflictManaged(id: number): Promise<any> {
         try {
             const request = await axios({
                 url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/audit/conflict-information/set-managed`,
@@ -66,7 +65,7 @@ export class KMAudit {
         }
     }
 
-    public async setDuplicatedInformationManaged(id: number): Promise<SearchResult> {
+    public async setDuplicatedInformationManaged(id: number): Promise<any> {
         try {
             const request = await axios({
                 url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/audit/duplicated-information/set-managed`,
