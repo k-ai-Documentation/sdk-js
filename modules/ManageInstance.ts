@@ -1,22 +1,21 @@
 import axios from "axios";
-import {type KaiStudioCredentials} from "..";
 
 export class ManageInstance {
 
-    private credentials: KaiStudioCredentials
+    private readonly headers: object;
+    private readonly baseUrl: string;
 
-    constructor(credentials: KaiStudioCredentials) {
-        this.credentials = credentials
+    constructor(headers: object, baseUrl: string) {
+        this.headers = headers
+        this.baseUrl = baseUrl
     }
 
     public async getGlobalHealth(): Promise<any> {
         try {
             const request = await axios({
-                url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/global/health`,
+                url: `${this.baseUrl}/global/health`,
                 method: 'GET',
-                headers: {
-                    'api-key': this.credentials.apiKey
-                }
+                headers: this.headers
             })
             return request.data
         } catch (e) {
@@ -27,11 +26,9 @@ export class ManageInstance {
     public async isApiAlive(): Promise<any> {
         try {
             const request = await axios({
-                url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/health`,
+                url: `${this.baseUrl}/health`,
                 method: 'GET',
-                headers: {
-                    'api-key': this.credentials.apiKey
-                }
+                headers: this.headers
             })
             return request.data
         } catch (e) {
@@ -44,11 +41,7 @@ export class ManageInstance {
             const request = await axios({
                 url: 'https://ima.kai-studio.ai/generate-new-apikey',
                 method: 'POST',
-                headers: {
-                    'organization-id': this.credentials.organizationId,
-                    'instance-id': this.credentials.instanceId,
-                    'api-key': this.credentials.apiKey
-                }
+                headers: this.headers
             })
             return request.data.response
         } catch (e) {
@@ -61,11 +54,7 @@ export class ManageInstance {
             const request = await axios({
                 url: 'https://ima.kai-studio.ai/update-name',
                 method: 'POST',
-                headers: {
-                    'organization-id': this.credentials.organizationId,
-                    'instance-id': this.credentials.instanceId,
-                    'api-key': this.credentials.apiKey
-                },
+                headers: this.headers,
                 data: {
                     name
                 }
@@ -81,11 +70,7 @@ export class ManageInstance {
             const request = await axios({
                 url: 'https://ima.kai-studio.ai/deploy',
                 method: 'POST',
-                headers: {
-                    'organization-id': this.credentials.organizationId,
-                    'instance-id': this.credentials.instanceId,
-                    'api-key': this.credentials.apiKey
-                }
+                headers: this.headers
             })
             return request.data.response
         } catch (e) {
@@ -98,11 +83,7 @@ export class ManageInstance {
             const request = await axios({
                 url: 'https://ima.kai-studio.ai/delete',
                 method: 'POST',
-                headers: {
-                    'organization-id': this.credentials.organizationId,
-                    'instance-id': this.credentials.instanceId,
-                    'api-key': this.credentials.apiKey
-                }
+                headers: this.headers
             })
             return request.data.response
         } catch (e) {
@@ -115,11 +96,7 @@ export class ManageInstance {
             const request = await axios({
                 url: 'https://ima.kai-studio.ai/add-kb',
                 method: 'POST',
-                headers: {
-                    'organization-id': this.credentials.organizationId,
-                    'instance-id': this.credentials.instanceId,
-                    'api-key': this.credentials.apiKey
-                },
+                headers: this.headers,
                 data: {type, options}
             })
             return request.data.response
@@ -133,11 +110,7 @@ export class ManageInstance {
             const request = await axios({
                 url: 'https://ima.kai-studio.ai/set-playground',
                 method: 'POST',
-                headers: {
-                    'organization-id': this.credentials.organizationId,
-                    'instance-id': this.credentials.instanceId,
-                    'api-key': this.credentials.apiKey
-                },
+                headers: this.headers,
                 data: {typeList}
             })
             return request.data.response
@@ -151,11 +124,7 @@ export class ManageInstance {
             const request = await axios({
                 url: 'https://ima.kai-studio.ai/update-kb',
                 method: 'POST',
-                headers: {
-                    'organization-id': this.credentials.organizationId,
-                    'instance-id': this.credentials.instanceId,
-                    'api-key': this.credentials.apiKey
-                },
+                headers: this.headers,
                 data: {id, options}
             })
             return request.data.response
@@ -169,11 +138,7 @@ export class ManageInstance {
             const request = await axios({
                 url: 'https://ima.kai-studio.ai/remove-kb',
                 method: 'POST',
-                headers: {
-                    'organization-id': this.credentials.organizationId,
-                    'instance-id': this.credentials.instanceId,
-                    'api-key': this.credentials.apiKey
-                },
+                headers: this.headers,
                 data: {id}
             })
             return request.data.response

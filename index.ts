@@ -10,6 +10,11 @@ export interface KaiStudioCredentials {
     apiKey: string
 }
 
+export interface KaiStudioCredentials {
+    host: string, // example :https://loremipsum.com
+    key?: string
+}
+
 export class KaiStudio {
 
     private readonly credentials: KaiStudioCredentials;
@@ -21,11 +26,33 @@ export class KaiStudio {
 
     constructor(credentials: KaiStudioCredentials) {
         this.credentials = credentials
-        this._search = new Search(this.credentials)
-        this._fileInstance = new FileInstance(this.credentials)
-        this._manageInstance = new ManageInstance(this.credentials)
-        this._auditInstance = new KMAudit(this.credentials)
-        this._thematic = new Thematic(this.credentials)
+        let headers = {}, baseUrl = ''
+
+        if (this.credentials.organizationId && this.credentials.instanceId && this.credentials.apiKey) {
+            headers = {
+                'organization-id': this.credentials.organizationId,
+                'instance-id': this.credentials.instanceId,
+                'api-key': this.credentials.apiKey
+            }
+
+            baseUrl = `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/`
+        }
+
+        if (this.credentials.host) {
+            baseUrl = this.credentials.host
+            if (this.credentials.apiKey) {
+                headers = {
+                    'api-key': this.credentials.apiKey
+                }
+            }
+        }
+
+
+        this._search = new Search(headers, baseUrl)
+        this._auditInstance = new KMAudit(headers, baseUrl)
+        this._thematic = new Thematic(headers, baseUrl)
+        this._manageInstance = new ManageInstance(headers, baseUrl)
+        this._fileInstance = new FileInstance(headers)
     }
 
     public getCredentials(): KaiStudioCredentials {

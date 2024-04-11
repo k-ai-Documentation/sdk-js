@@ -1,23 +1,22 @@
 import type {KaiStudioCredentials} from "../index";
 import axios from "axios";
-import {SearchResult} from "./Search";
 
 export class KMAudit {
 
-    private credentials: KaiStudioCredentials;
+    private readonly headers: object;
+    private readonly baseUrl: string;
 
-    constructor(credentials: KaiStudioCredentials) {
-        this.credentials = credentials
+    constructor(headers: object, baseUrl: string) {
+        this.headers = headers
+        this.baseUrl = baseUrl
     }
 
-    public async getConflictInformation(limit: number, offset: number): Promise<SearchResult> {
+    public async getConflictInformation(limit: number, offset: number): Promise<any> {
         try {
             const request = await axios({
-                url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/audit/conflict-informations`,
+                url: `${this.baseUrl}api/audit/conflict-information`,
                 method: 'POST',
-                headers: {
-                    'api-key': this.credentials.apiKey
-                },
+                headers: this.headers,
                 data: {
                     offset: offset,
                     limit: limit
@@ -29,14 +28,12 @@ export class KMAudit {
         }
     }
 
-    public async getDuplicatedInformation(limit: number, offset: number): Promise<SearchResult> {
+    public async getDuplicatedInformation(limit: number, offset: number): Promise<any> {
         try {
             const request = await axios({
-                url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/audit/duplicated-informations`,
+                url: `${this.baseUrl}api/audit/duplicated-information`,
                 method: 'POST',
-                headers: {
-                    'api-key': this.credentials.apiKey
-                },
+                headers: this.headers,
                 data: {
                     offset: offset,
                     limit: limit
@@ -48,14 +45,12 @@ export class KMAudit {
         }
     }
 
-    public async setConflictManaged(id: number): Promise<SearchResult> {
+    public async setConflictManaged(id: number): Promise<any> {
         try {
             const request = await axios({
-                url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/audit/conflict-information/set-managed`,
+                url: `${this.baseUrl}api/audit/conflict-information/set-managed`,
                 method: 'POST',
-                headers: {
-                    'api-key': this.credentials.apiKey
-                },
+                headers: this.headers,
                 data: {
                     id: id
                 }
@@ -66,14 +61,12 @@ export class KMAudit {
         }
     }
 
-    public async setDuplicatedInformationManaged(id: number): Promise<SearchResult> {
+    public async setDuplicatedInformationManaged(id: number): Promise<any> {
         try {
             const request = await axios({
-                url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/audit/duplicated-information/set-managed`,
+                url: `${this.baseUrl}api/audit/duplicated-information/set-managed`,
                 method: 'POST',
-                headers: {
-                    'api-key': this.credentials.apiKey
-                },
+                headers: this.headers,
                 data: {
                     id: id
                 }
