@@ -3,6 +3,7 @@ import {ManageInstance} from "./modules/ManageInstance";
 import {Search} from "./modules/Search";
 import {Thematic} from "./modules/Thematic";
 import {KMAudit} from "./modules/KMAudit";
+import {SemanticGraph} from "./modules/SemanticGraph";
 
 export interface KaiStudioCredentials {
     organizationId: string,
@@ -23,6 +24,7 @@ export class KaiStudio {
     private readonly _manageInstance: ManageInstance;
     private readonly _thematic: Thematic;
     private readonly _auditInstance: KMAudit;
+    private readonly _semanticGraph: SemanticGraph;
 
     constructor(credentials: KaiStudioCredentials) {
         this.credentials = credentials
@@ -51,6 +53,7 @@ export class KaiStudio {
         this._search = new Search(headers, baseUrl)
         this._auditInstance = new KMAudit(headers, baseUrl)
         this._thematic = new Thematic(headers, baseUrl)
+        this._semanticGraph = new SemanticGraph(headers, baseUrl)
         this._manageInstance = new ManageInstance(headers, baseUrl)
         this._fileInstance = new FileInstance(headers)
     }
@@ -77,6 +80,10 @@ export class KaiStudio {
 
     public auditInstance(): KMAudit {
         return this._auditInstance
+    }
+
+    public semanticGraph(): SemanticGraph {
+        return this._semanticGraph
     }
 }
 
