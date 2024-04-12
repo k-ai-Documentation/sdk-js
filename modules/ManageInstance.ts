@@ -13,7 +13,7 @@ export class ManageInstance {
     public async getGlobalHealth(): Promise<any> {
         try {
             const request = await axios({
-                url: `${this.baseUrl}/global/health`,
+                url: `${this.baseUrl}global/health`,
                 method: 'GET',
                 headers: this.headers
             })
@@ -26,7 +26,7 @@ export class ManageInstance {
     public async isApiAlive(): Promise<any> {
         try {
             const request = await axios({
-                url: `${this.baseUrl}/health`,
+                url: `${this.baseUrl}health`,
                 method: 'GET',
                 headers: this.headers
             })
