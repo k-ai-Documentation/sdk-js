@@ -27,7 +27,7 @@ export class SemanticGraph {
         }
     }
 
-    public async getLinkedNodes(id: string): Promise<any> {
+    public async getLinkedNodes(id: number): Promise<any> {
         try {
             const request = await axios({
                 url: `${this.baseUrl}api/semantic-graph/linked-nodes`,
