@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export class KMAudit {
+export class SemanticGraph {
 
     private readonly headers: object;
     private readonly baseUrl: string;
@@ -10,15 +10,15 @@ export class KMAudit {
         this.baseUrl = baseUrl
     }
 
-    public async getConflictInformation(limit: number, offset: number): Promise<any> {
+    public async getNodes(limit: number, offset: number): Promise<any> {
         try {
             const request = await axios({
-                url: `${this.baseUrl}api/audit/conflict-information`,
+                url: `${this.baseUrl}api/semantic-graph/nodes`,
                 method: 'POST',
                 headers: this.headers,
                 data: {
-                    offset: offset,
-                    limit: limit
+                    'limit': limit,
+                    'offset': offset
                 }
             })
             return request.data.response
@@ -27,15 +27,14 @@ export class KMAudit {
         }
     }
 
-    public async getDuplicatedInformation(limit: number, offset: number): Promise<any> {
+    public async getLinkedNodes(id: string): Promise<any> {
         try {
             const request = await axios({
-                url: `${this.baseUrl}api/audit/duplicated-information`,
+                url: `${this.baseUrl}api/semantic-graph/linked-nodes`,
                 method: 'POST',
                 headers: this.headers,
                 data: {
-                    offset: offset,
-                    limit: limit
+                    'id': id
                 }
             })
             return request.data.response
@@ -44,14 +43,14 @@ export class KMAudit {
         }
     }
 
-    public async setConflictManaged(id: number): Promise<any> {
+    public async getNodeByLabel(label: string): Promise<any> {
         try {
             const request = await axios({
-                url: `${this.baseUrl}api/audit/conflict-information/set-managed`,
+                url: `${this.baseUrl}api/semantic-graph/nodes-by-label`,
                 method: 'POST',
                 headers: this.headers,
                 data: {
-                    id: id
+                    'label': label
                 }
             })
             return request.data.response
@@ -60,14 +59,14 @@ export class KMAudit {
         }
     }
 
-    public async setDuplicatedInformationManaged(id: number): Promise<any> {
+    public async detectApproximalNodes(query: string): Promise<any> {
         try {
             const request = await axios({
-                url: `${this.baseUrl}api/audit/duplicated-information/set-managed`,
+                url: `${this.baseUrl}api/semantic-graph/identify-nodes`,
                 method: 'POST',
                 headers: this.headers,
                 data: {
-                    id: id
+                    'query': query
                 }
             })
             return request.data.response
@@ -75,4 +74,6 @@ export class KMAudit {
             throw e
         }
     }
+
+
 }

@@ -1,5 +1,4 @@
 import axios from "axios";
-import { type KaiStudioCredentials } from "..";
 
 export interface KaiStudioFileSignature {
     name: string,
@@ -13,10 +12,10 @@ export interface KaiStudioFileUploadResponse {
 
 export class FileInstance {
 
-    private credentials: KaiStudioCredentials;
+    private readonly headers: object;
 
-    constructor(credentials: KaiStudioCredentials) {
-        this.credentials = credentials
+    constructor(headers: object) {
+        this.headers = headers
     }
 
     public async listFiles(): Promise<KaiStudioFileSignature[]> {
@@ -24,14 +23,10 @@ export class FileInstance {
             const request = await axios({
                 url: 'https://fma.kai-studio.ai/list-files',
                 method: 'POST',
-                headers: {
-                    'organization-id': this.credentials.organizationId,
-                    'instance-id': this.credentials.instanceId,
-                    'api-key': this.credentials.apiKey
-                }
+                headers: this.headers
             })
             return request.data.response
-        } catch(e) {
+        } catch (e) {
             throw e
         }
     }
@@ -41,40 +36,34 @@ export class FileInstance {
             const request = await axios({
                 url: 'https://fma.kai-studio.ai/download-file',
                 method: 'POST',
-                headers: {
-                    'organization-id': this.credentials.organizationId,
-                    'instance-id': this.credentials.instanceId,
-                    'api-key': this.credentials.apiKey
-                },
+                headers: this.headers,
                 data: {
                     fileName: fileName
                 }
             })
             return request.data.response
-        } catch(e) {
+        } catch (e) {
             throw e
         }
     }
 
     public async uploadFiles(files: File[]): Promise<KaiStudioFileUploadResponse[]> {
-        if(files.length == 0) {
+        if (files.length == 0) {
             return []
         }
         try {
             const formData = new FormData()
-            for(let i = 0; i < files.length; i++) {
+            for (let i = 0; i < files.length; i++) {
                 formData.append(`files`, files[i])
             }
             const request = await axios.post('https://fma.kai-studio.ai/upload-file', formData, {
                 headers: {
-                    'organization-id': this.credentials.organizationId,
-                    'instance-id': this.credentials.instanceId,
-                    'api-key': this.credentials.apiKey,
+                    ...this.headers,
                     "Content-Type": "multipart/form-data",
                 }
             })
             return request.data.response
-        } catch(e) {
+        } catch (e) {
             throw e
         }
     }
@@ -84,17 +73,13 @@ export class FileInstance {
             const request = await axios({
                 url: 'https://fma.kai-studio.ai/delete-file',
                 method: 'POST',
-                headers: {
-                    'organization-id': this.credentials.organizationId,
-                    'instance-id': this.credentials.instanceId,
-                    'api-key': this.credentials.apiKey
-                },
+                headers: this.headers,
                 data: {
                     file: fileName
                 }
             })
             return request.data.response
-        } catch(e) {
+        } catch (e) {
             throw e
         }
     }

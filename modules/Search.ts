@@ -1,5 +1,4 @@
 import axios from "axios";
-import { type KaiStudioCredentials } from "..";
 
 export interface DocumentResult {
     id: string,
@@ -26,27 +25,27 @@ export interface SearchResult {
 
 export class Search {
 
-    private credentials: KaiStudioCredentials;
+    private readonly headers: object;
+    private readonly baseUrl: string;
 
-    constructor(credentials: KaiStudioCredentials) {
-        this.credentials = credentials
+    constructor(headers: object, baseUrl: string) {
+        this.headers = headers
+        this.baseUrl = baseUrl
     }
 
     public async query(query: string, user: string): Promise<SearchResult> {
         try {
             const request = await axios({
-                url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/search/query`,
+                url: `${this.baseUrl}api/search/query`,
                 method: 'POST',
-                headers: {
-                    'api-key': this.credentials.apiKey
-                },
+                headers: this.headers,
                 data: {
                     query,
                     user
                 }
             })
             return request.data.response
-        } catch(e) {
+        } catch (e) {
             throw e
         }
     }
@@ -54,17 +53,15 @@ export class Search {
     public async getRelatedDocuments(query: string): Promise<any> {
         try {
             const request = await axios({
-                url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/search/related-documents`,
+                url: `${this.baseUrl}api/search/related-documents`,
                 method: 'POST',
-                headers: {
-                    'api-key': this.credentials.apiKey
-                },
+                headers: this.headers,
                 data: {
                     query
                 }
             })
             return request.data.response
-        } catch(e) {
+        } catch (e) {
             throw e
         }
     }
@@ -72,14 +69,12 @@ export class Search {
     public async countAnalyzedDocuments(): Promise<number> {
         try {
             const request = await axios({
-                url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/thematic/stats/count-documents`,
+                url: `${this.baseUrl}api/thematic/stats/count-documents`,
                 method: 'POST',
-                headers: {
-                    'api-key': this.credentials.apiKey
-                }
+                headers: this.headers
             })
             return request.data.response
-        } catch(e) {
+        } catch (e) {
             throw e
         }
     }
@@ -87,14 +82,12 @@ export class Search {
     public async getDocSignature(docId: string): Promise<any> {
         try {
             const request = await axios({
-                url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/search/doc/${docId}`,
+                url: `${this.baseUrl}api/search/doc/${docId}`,
                 method: 'POST',
-                headers: {
-                    'api-key': this.credentials.apiKey
-                }
+                headers: this.headers
             })
             return request.data.response
-        } catch(e) {
+        } catch (e) {
             throw e
         }
     }
@@ -102,17 +95,15 @@ export class Search {
     public async getDocsIds(docsIds: string[]): Promise<string[]> {
         try {
             const request = await axios({
-                url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/search/docs`,
+                url: `${this.baseUrl}api/search/docs`,
                 method: 'POST',
-                headers: {
-                    'api-key': this.credentials.apiKey
-                },
+                headers: this.headers,
                 data: {
                     'docsIds': docsIds
                 }
             })
             return request.data.response
-        } catch(e) {
+        } catch (e) {
             throw e
         }
     }
@@ -120,14 +111,12 @@ export class Search {
     public async countDoneRequests(): Promise<number> {
         try {
             const request = await axios({
-                url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/search/stats/count-search`,
+                url: `${this.baseUrl}api/search/stats/count-search`,
                 method: 'POST',
-                headers: {
-                    'api-key': this.credentials.apiKey
-                }
+                headers: this.headers
             })
             return request.data.response
-        } catch(e) {
+        } catch (e) {
             throw e
         }
     }
@@ -135,14 +124,12 @@ export class Search {
     public async countAnsweredDoneRequests(): Promise<number> {
         try {
             const request = await axios({
-                url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/search/stats/count-answered-search`,
+                url: `${this.baseUrl}api/search/stats/count-answered-search`,
                 method: 'POST',
-                headers: {
-                    'api-key': this.credentials.apiKey
-                }
+                headers: this.headers
             })
             return request.data.response
-        } catch(e) {
+        } catch (e) {
             throw e
         }
     }
@@ -151,18 +138,16 @@ export class Search {
     public async generateFollowingQuestion(previousAnswer: string, comment: string): Promise<number> {
         try {
             const request = await axios({
-                url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/search/generate-following-question`,
+                url: `${this.baseUrl}api/search/generate-following-question`,
                 method: 'POST',
-                headers: {
-                    'api-key': this.credentials.apiKey
-                },
+                headers: this.headers,
                 data: {
                     "previousAnswer": previousAnswer,
                     "comment": comment
                 }
             })
             return request.data.response
-        } catch(e) {
+        } catch (e) {
             throw e
         }
     }
@@ -170,15 +155,13 @@ export class Search {
     public async listQuestionsAsked(offset: number = 0, limit: number = 20): Promise<SearchLog[]> {
         try {
             const request = await axios({
-                url: `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/api/search/stats/list-search`,
+                url: `${this.baseUrl}api/search/stats/list-search`,
                 method: 'POST',
-                headers: {
-                    'api-key': this.credentials.apiKey
-                },
-                data: { offset, limit }
+                headers: this.headers,
+                data: {offset, limit}
             })
             return request.data.response
-        } catch(e) {
+        } catch (e) {
             throw e
         }
     }
