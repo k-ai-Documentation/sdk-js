@@ -6,14 +6,14 @@ import {KMAudit} from "./modules/KMAudit";
 import {SemanticGraph} from "./modules/SemanticGraph";
 
 export interface KaiStudioCredentials {
-    organizationId: string,
-    instanceId: string,
-    apiKey: string
+    organizationId: any,
+    instanceId: any,
+    apiKey: any
 }
 
 export interface KaiStudioCredentials {
-    host: string, // example :https://loremipsum.com
-    key?: string
+    host: any,
+    key?: any
 }
 
 export class KaiStudio {
