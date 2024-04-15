@@ -2,7 +2,9 @@ import axios from "axios";
 
 export interface KaiStudioFileSignature {
     name: string,
-    metadata: string
+    metadata: string,
+    lastModified: string,
+    size: number
 }
 
 export interface KaiStudioFileUploadResponse {
