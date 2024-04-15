@@ -7,7 +7,7 @@ SDK js/ts enables developers to efficiently manage files, instance, perform sear
 To integrate the SDK into your project, include the SDK files in your project directory. Then, use the following require statements in your project root directory:
 
 ```bash
-npm install yourProjectDirectory/sdk-js
+npm install file:path/to/sdk-js --save
 ```
 
 ## Quick start
