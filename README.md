@@ -22,7 +22,6 @@ console.log(request)
 ## Usage Guide
 ### File Management
 [FileInstance.ts](modules/FileInstance.ts) provides methods for file management.
-- uploadFilescreation, deletion, and modification.
 - listFiles
 - downloadFile
 - uploadFiles
@@ -39,7 +38,6 @@ fileInstance.listFiles().then(response => {
 
 ### Auditing
 [KMAudit.ts](modules/KMAudit.ts) provides methods for auditing.
-- getConflictInformationlows for tracking and auditing file changes.
 - getConflictInformation
 - getDuplicatedInformation
 - setConflictManaged
@@ -86,7 +84,6 @@ manageInstance.getGlobalHealth().then(response => {
 - getTestRunningState
 - runTest
 - listTopics
-- listSubtopics
 - getSubtopic
 - countTopics
 - countSubtopics
@@ -122,10 +119,14 @@ semantic.getNodes(10,0).then(response => {
 ### Search
 [Search.ts](modules/Search.ts) provides methods for searching.
 - search
-- searchByQuery
-- searchByQueryWithoutPagination
-- searchByQueryWithoutPaginationAndWithoutSorting
-- searchByQueryWithoutPaginationAndWithoutSortingAndWithoutFacets
+- getRelatedDocuments
+- countAnalyzedDocuments
+- getDocSignature
+- getDocsIds
+- countDoneRequests
+- countAnsweredDoneRequests
+- generateFollowingQuestion
+- listQuestionsAsked
 ```js
 let search = kaiStudio.search()
 search.query("what is the history of France TV?", "userid").then(response => {
