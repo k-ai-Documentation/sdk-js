@@ -92,4 +92,21 @@ export class KMAudit {
             throw e
         }
     }
+
+    public async getMissingSubjectList(limit: number, offset: number): Promise<any> {
+        try {
+            const request = await axios({
+                url: `${this.baseUrl}api/audit/missing-subjects`,
+                method: 'POST',
+                headers: this.headers,
+                data: {
+                    offset: offset,
+                    limit: limit
+                }
+            })
+            return request.data.response
+        } catch (e) {
+            throw e
+        }
+    }
 }
