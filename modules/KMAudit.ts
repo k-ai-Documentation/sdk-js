@@ -75,4 +75,21 @@ export class KMAudit {
             throw e
         }
     }
+
+    public async getDocumentsToManageList(limit: number, offset: number): Promise<any> {
+        try {
+            const request = await axios({
+                url: `${this.baseUrl}api/audit/duplicated-information/documents-to-manage`,
+                method: 'POST',
+                headers: this.headers,
+                data: {
+                    offset: offset,
+                    limit: limit
+                }
+            })
+            return request.data.response
+        } catch (e) {
+            throw e
+        }
+    }
 }
