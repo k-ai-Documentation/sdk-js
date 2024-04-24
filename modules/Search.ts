@@ -33,7 +33,7 @@ export class Search {
         this.baseUrl = baseUrl
     }
 
-    public async query(query: string, user: string): Promise<SearchResult> {
+    public async query(query: string, user: string, impersonate: string, multiDocuments: boolean, needFollowingQuestions: boolean): Promise<SearchResult> {
         try {
             const request = await axios({
                 url: `${this.baseUrl}api/search/query`,
@@ -41,7 +41,10 @@ export class Search {
                 headers: this.headers,
                 data: {
                     query,
-                    user
+                    user,
+                    impersonate,
+                    multiDocuments,
+                    needFollowingQuestions
                 }
             })
             return request.data.response
