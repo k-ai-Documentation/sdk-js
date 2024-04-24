@@ -28,11 +28,7 @@ console.log(request)
 ## Usage Guide
 There are two type of versions: SaaS version and Premise version.
 
-SaaS version means you are using the service provided by Kai with cloud service. In this case, you need to provide your organizationId, instanceId, and apiKey to initialize the SDK.
-
-Premise version means you are using the service in your local server in your enterprise. In this case, you need to provide your host and api key (api kay is optional, depends on your enterprise settings) to initialize the SDK.
-
-For SaaS version, you will need 3 keys (organizationId, instanceId, apiKey) to initialize kaiStudio. Please refer to the following code in [index.ts](index.ts):
+SaaS version means you are using the service provided by Kai with cloud service. In this case, you will need 3 keys (organizationId, instanceId, apiKey) to initialize kaiStudio. Please refer to the following code in [index.ts](index.ts):
 ```js
 if (this.credentials.organizationId && this.credentials.instanceId && this.credentials.apiKey) {
     headers = {
@@ -44,7 +40,8 @@ if (this.credentials.organizationId && this.credentials.instanceId && this.crede
     baseUrl = `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/`
 }
 ```
-For Premise version, you will need host and api key (optional) to initialize kaiStudio. Please refer to the following code in [index.ts](index.ts):
+
+Premise version means you are using the service in your local server in your enterprise. In this case, you will need host and api key (optional) to initialize kaiStudio. Please refer to the following code in [index.ts](index.ts):
 ```js
 if (this.credentials.host) {
     baseUrl = this.credentials.host
