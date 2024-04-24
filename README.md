@@ -54,12 +54,10 @@ if (this.credentials.host) {
 ```
 
 There are 6 modules in the SDK:
-- [File Management](#file-management)
-- [Audit](#audit)
-- [ManageInstance](#manageinstance)
-- [Thematic](#thematic)
-- [SemanticGraph](#semanticgraph)
-- [Search](#search)
+
+| [File Management](#file-management) | [Audit](#audit) | [ManageInstance](#manageinstance) | [Thematic](#thematic) | [SemanticGraph](#semanticgraph) | [Search](#search) |
+
+
 
 ### File Management
 [FileInstance.ts](modules/FileInstance.ts) provides methods for file management.
@@ -78,7 +76,7 @@ fileInstance.listFiles().then(response => {
 ```
 
 ### Audit
-[KMAudit.ts](modules/KMAudit.ts) provides methods for auditing.
+[KMAudit.ts](modules/KMAudit.ts) provides methods for auditing files.
 - getConflictInformation
 - getDuplicatedInformation
 - setConflictManaged
