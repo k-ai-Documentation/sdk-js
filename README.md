@@ -12,14 +12,58 @@ npm install file:path/to/sdk-js --save
 
 ## Quick start
 Here's a simple example to get you started with the SDK. This example demonstrates how to instantiate a new search and perform basic operations:
-```
+```js
 import { KaiStudio } from "sdk-js"
+
+// for saas user
 const kaiSearch = new KaiStudio({ organizationId: process.env.VUE_APP_ORGANIZATION_ID, instanceId: process.env.VUE_APP_INSTANCE_ID, apiKey: process.env.VUE_APP_API_KEY })
+// for premise user
+const kaiSearch = new KaiStudio({ host: process.env.VUE_APP_HOST , apiKey: process.env.VUE_APP_HOST })
+
+// send your search request
 const request = await kaiSearch.search().query("YOUR QUESTION HERE", "");
 console.log(request)
 ```
 
 ## Usage Guide
+There are two type of versions: SaaS version and Premise version.
+
+SaaS version means you are using the service provided by Kai with cloud service. In this case, you need to provide your organizationId, instanceId, and apiKey to initialize the SDK.
+
+Premise version means you are using the service in your local server in your enterprise. In this case, you need to provide your host and api key (api kay is optional, depends on your enterprise settings) to initialize the SDK.
+
+For SaaS version, you will need 3 keys (organizationId, instanceId, apiKey) to initialize kaiStudio. Please refer to the following code in [index.ts](index.ts):
+```js
+if (this.credentials.organizationId && this.credentials.instanceId && this.credentials.apiKey) {
+    headers = {
+        'organization-id': this.credentials.organizationId,
+        'instance-id': this.credentials.instanceId,
+        'api-key': this.credentials.apiKey
+    }
+
+    baseUrl = `https://${this.credentials.organizationId}.kai-studio.ai/${this.credentials.instanceId}/`
+}
+```
+For Premise version, you will need host and api key (optional) to initialize kaiStudio. Please refer to the following code in [index.ts](index.ts):
+```js
+if (this.credentials.host) {
+    baseUrl = this.credentials.host
+    if (this.credentials.apiKey) {
+        headers = {
+            'api-key': this.credentials.apiKey
+        }
+    }
+}
+```
+
+There are 6 modules in the SDK:
+- [File Management](#file-management)
+- [Audit](#audit)
+- [ManageInstance](#manageinstance)
+- [Thematic](#thematic)
+- [SemanticGraph](#semanticgraph)
+- [Search](#search)
+
 ### File Management
 [FileInstance.ts](modules/FileInstance.ts) provides methods for file management.
 - listFiles
@@ -36,7 +80,7 @@ fileInstance.listFiles().then(response => {
 })
 ```
 
-### Auditing
+### Audit
 [KMAudit.ts](modules/KMAudit.ts) provides methods for auditing.
 - getConflictInformation
 - getDuplicatedInformation
