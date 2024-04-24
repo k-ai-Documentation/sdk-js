@@ -52,6 +52,7 @@ if (this.credentials.host) {
     }
 }
 ```
+---
 
 There are 6 modules in the SDK:
 
