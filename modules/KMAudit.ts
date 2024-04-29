@@ -1,5 +1,42 @@
 import axios from "axios";
 
+export interface ConflictInformation {
+    id: string,
+    state: string,
+    subject: string,
+    creation_date: string,
+    docsRef: Document[],
+    documents: InvolvedInformation[]
+}
+
+export interface DuplicateInformation {
+    id: string,
+    state: string,
+    subject: string,
+    creation_date: string,
+    docsRef: Document[],
+    documents: InvolvedInformation[]
+}
+
+export interface MissingSubject {
+    id: number,
+    information_needed: string,
+    questions: string[],
+    subject: string
+}
+
+export interface Document {
+    id: string,
+    name: string,
+    url: string
+}
+
+export interface InvolvedInformation {
+    docId: string,
+    information_involved: string
+}
+
+
 export class KMAudit {
 
     private readonly headers: object;
@@ -10,7 +47,7 @@ export class KMAudit {
         this.baseUrl = baseUrl
     }
 
-    public async getConflictInformation(limit: number, offset: number): Promise<any> {
+    public async getConflictInformation(limit: number, offset: number): Promise<ConflictInformation[] | any> {
         try {
             const request = await axios({
                 url: `${this.baseUrl}api/audit/conflict-information`,
@@ -27,7 +64,7 @@ export class KMAudit {
         }
     }
 
-    public async getDuplicatedInformation(limit: number, offset: number): Promise<any> {
+    public async getDuplicatedInformation(limit: number, offset: number): Promise<DuplicateInformation[] | any> {
         try {
             const request = await axios({
                 url: `${this.baseUrl}api/audit/duplicated-information`,
@@ -76,7 +113,7 @@ export class KMAudit {
         }
     }
 
-    public async getDocumentsToManageList(limit: number, offset: number): Promise<any> {
+    public async getDocumentsToManageList(limit: number, offset: number): Promise<Document[] | any> {
         try {
             const request = await axios({
                 url: `${this.baseUrl}api/audit/documents-to-manage`,
@@ -93,7 +130,7 @@ export class KMAudit {
         }
     }
 
-    public async getMissingSubjectList(limit: number, offset: number): Promise<any> {
+    public async getMissingSubjectList(limit: number, offset: number): Promise<MissingSubject[] | any> {
         try {
             const request = await axios({
                 url: `${this.baseUrl}api/audit/missing-subjects`,
