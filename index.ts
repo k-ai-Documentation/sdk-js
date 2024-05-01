@@ -84,5 +84,9 @@ export class KaiStudio {
     public semanticGraph(): SemanticGraph {
         return this._semanticGraph
     }
+
+    public core(): Core {
+        return this._core
+    }
 }
 
