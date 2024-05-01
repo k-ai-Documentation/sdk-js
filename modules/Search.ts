@@ -69,6 +69,22 @@ export class Search {
         }
     }
 
+    public async reformulateQuery(query: string): Promise<any> {
+        try {
+            const request = await axios({
+                url: `${this.baseUrl}api/search/reformulate-query`,
+                method: 'POST',
+                headers: this.headers,
+                data: {
+                    query
+                }
+            })
+            return request.data.response
+        } catch (e) {
+            throw e
+        }
+    }
+
     public async countAnalyzedDocuments(): Promise<number> {
         try {
             const request = await axios({
