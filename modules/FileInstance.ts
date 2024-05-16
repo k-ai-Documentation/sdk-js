@@ -56,7 +56,6 @@ export class FileInstance {
         try {
             const formData = new FormData()
             for (let i = 0; i < files.length; i++) {
-                console.log(files[i])
                 formData.append(`files`, files[i])
             }
             const request = await axios.post('https://fma.kai-studio.ai/upload-file', formData, {
