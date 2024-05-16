@@ -61,7 +61,7 @@ export class FileInstance {
             const request = await axios.post('https://fma.kai-studio.ai/upload-file', formData, {
                 headers: {
                     ...this.headers,
-                    "Content-Type": "multipart/form-data",
+                    "Content-Type": "multipart/form-data; charset=utf-8",
                 }
             })
             return request.data.response
