@@ -91,13 +91,13 @@ export class ManageInstance {
         }
     }
 
-    public async addKb(type: string, options: any): Promise<boolean> {
+    public async addKb(type: string, options: any, searchGoal: any): Promise<boolean> {
         try {
             const request = await axios({
                 url: 'https://ima.kai-studio.ai/add-kb',
                 method: 'POST',
                 headers: this.headers,
-                data: {type, options}
+                data: {type, options, searchGoal}
             })
             return request.data.response
         } catch (e) {
@@ -119,13 +119,13 @@ export class ManageInstance {
         }
     }
 
-    public async updateKb(id: string, options: any): Promise<boolean> {
+    public async updateKb(id: string, options: any, searchGoal: any): Promise<boolean> {
         try {
             const request = await axios({
                 url: 'https://ima.kai-studio.ai/update-kb',
                 method: 'POST',
                 headers: this.headers,
-                data: {id, options}
+                data: {id, options, searchGoal}
             })
             return request.data.response
         } catch (e) {
