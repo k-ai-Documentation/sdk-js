@@ -53,38 +53,6 @@ export class Search {
         }
     }
 
-    public async getRelatedDocuments(query: string): Promise<any> {
-        try {
-            const request = await axios({
-                url: `${this.baseUrl}api/search/related-documents`,
-                method: 'POST',
-                headers: this.headers,
-                data: {
-                    query
-                }
-            })
-            return request.data.response
-        } catch (e) {
-            throw e
-        }
-    }
-
-    public async reformulateQuery(query: string): Promise<any> {
-        try {
-            const request = await axios({
-                url: `${this.baseUrl}api/search/reformulate-query`,
-                method: 'POST',
-                headers: this.headers,
-                data: {
-                    query
-                }
-            })
-            return request.data.response
-        } catch (e) {
-            throw e
-        }
-    }
-
     public async countAnalyzedDocuments(): Promise<number> {
         try {
             const request = await axios({
@@ -146,24 +114,6 @@ export class Search {
                 url: `${this.baseUrl}api/search/stats/count-answered-search`,
                 method: 'POST',
                 headers: this.headers
-            })
-            return request.data.response
-        } catch (e) {
-            throw e
-        }
-    }
-
-
-    public async generateFollowingQuestion(previousAnswer: string, comment: string): Promise<number> {
-        try {
-            const request = await axios({
-                url: `${this.baseUrl}api/search/generate-following-question`,
-                method: 'POST',
-                headers: this.headers,
-                data: {
-                    "previousAnswer": previousAnswer,
-                    "comment": comment
-                }
             })
             return request.data.response
         } catch (e) {
