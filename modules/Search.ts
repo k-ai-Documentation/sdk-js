@@ -135,4 +135,18 @@ export class Search {
         }
     }
 
+    public async identifySpecificDocument(conversation: any): Promise<SearchLog[]> {
+        try {
+            const request = await axios({
+                url: `${this.baseUrl}api/search/identify-specific-document`,
+                method: 'POST',
+                headers: this.headers,
+                data: {"conversation": conversation}
+            })
+            return request.data.response
+        } catch (e) {
+            throw e
+        }
+    }
+
 }
