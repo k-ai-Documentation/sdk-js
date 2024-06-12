@@ -143,7 +143,7 @@ export class Search {
                 headers: this.headers,
                 data: {"conversation": conversation}
             })
-            return request.data.response
+            return request.data
         } catch (e) {
             throw e
         }
