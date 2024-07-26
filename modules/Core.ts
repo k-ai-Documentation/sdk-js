@@ -19,7 +19,7 @@ export class Core {
             })
             return request.data.response
         } catch (e) {
-            throw e
+            return 0
         }
     }
 
@@ -32,7 +32,7 @@ export class Core {
             })
             return request.data.response
         } catch (e) {
-            throw e
+            return 0
         }
     }
 
@@ -45,7 +45,7 @@ export class Core {
             })
             return request.data.response
         } catch (e) {
-            throw e
+            return 0
         }
     }
 
@@ -58,7 +58,7 @@ export class Core {
             })
             return request.data.response
         } catch (e) {
-            throw e
+            return 0
         }
     }
 
