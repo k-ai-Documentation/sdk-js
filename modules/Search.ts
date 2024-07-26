@@ -149,4 +149,17 @@ export class Search {
         }
     }
 
+    public async getVersion(): Promise<SearchLog[]> {
+        try {
+            const request = await axios({
+                url: `${this.baseUrl}/version`,
+                method: 'POST',
+                headers: this.headers
+            })
+            return request.data
+        } catch (e) {
+            throw e
+        }
+    }
+
 }
