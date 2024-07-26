@@ -22,4 +22,44 @@ export class Core {
             throw e
         }
     }
+
+    public async countDetectedDocuments(): Promise<number> {
+        try {
+            const request = await axios({
+                url: `${this.baseUrl}api/orchestrator/stats/count-detected-documents`,
+                method: 'POST',
+                headers: this.headers
+            })
+            return request.data.response
+        } catch (e) {
+            throw e
+        }
+    }
+
+    public async countIndexableDocuments(): Promise<number> {
+        try {
+            const request = await axios({
+                url: `${this.baseUrl}api/orchestrator/stats/count-indexable-documents`,
+                method: 'POST',
+                headers: this.headers
+            })
+            return request.data.response
+        } catch (e) {
+            throw e
+        }
+    }
+
+    public async countIndexedDocuments(): Promise<number> {
+        try {
+            const request = await axios({
+                url: `${this.baseUrl}api/orchestrator/stats/count-indexed-documents`,
+                method: 'POST',
+                headers: this.headers
+            })
+            return request.data.response
+        } catch (e) {
+            throw e
+        }
+    }
+
 }
