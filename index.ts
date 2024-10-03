@@ -26,8 +26,6 @@ export class KaiStudio {
 
         if (this.credentials.organizationId && this.credentials.instanceId && this.credentials.apiKey) {
             headers = {
-                'organization-id': this.credentials.organizationId,
-                'instance-id': this.credentials.instanceId,
                 'api-key': this.credentials.apiKey
             }
 
