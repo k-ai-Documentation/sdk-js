@@ -54,24 +54,27 @@ if (this.credentials.host) {
 ```
 ---
 
-There are 6 modules in the SDK:
+There are 5 modules in the SDK:
 
-| [File Management](#file-management) | [Audit](#audit) | [ManageInstance](#manageinstance) | [Thematic](#thematic) | [SemanticGraph](#semanticgraph) | [Search](#search) |
+| [Core](#core) | [Audit](#audit) | [ManageInstance](#manageinstance) | [SemanticGraph](#semanticgraph) | [Search](#search) |
 
-
-
-### File Management
-[FileInstance.ts](modules/FileInstance.ts) provides methods for file management.
-- listFiles
+### Core
+[Core.ts](modules/Core.ts) provides methods for quering the status of documents.
+- countDocuments
+- countDetectedDocuments
+- countIndexableDocuments
+- countIndexedDocuments
 - downloadFile
-- uploadFiles
-- removeFile
+- indexNewOrUpdatedDocument
+- getAllScenarios
+- getLogs
+- reinitAll
 
 For example:
 ```js
-let fileInstance = kaiStudio.fileInstance()
-fileInstance.listFiles().then(response => {
-    console.log("LIST FILES:")
+let core = kaiStudio.core()
+core.countDocuments().then(response => {
+    console.log("COUNT DOCUMENTS:")
     console.log(response)
 })
 ```
@@ -82,6 +85,9 @@ fileInstance.listFiles().then(response => {
 - getDuplicatedInformation
 - setConflictManaged
 - setDuplicatedInformationManaged
+- getDocumentsToManageList
+- getMissingSubjectList
+- getAllTasksLinkedToDocument
 
 For example:
 ```js
@@ -95,14 +101,7 @@ auditInstance.getConflictInformation(10,0).then(response => {
 [ManageInstance.ts](modules/ManageInstance.ts) provides methods for managing instance.
 - getGlobalHealth
 - isApiAlive
-- generateNewApiKey
-- updateName
-- deploy
-- delete
-- addKb
-- setPlayground
-- updateKb
-- removeKb
+- getVersion
 
 For example:
 ```js
@@ -113,29 +112,20 @@ manageInstance.getGlobalHealth().then(response => {
 })
 ```
 
-### Thematic
-[Thematic.ts](modules/Thematic.ts) provides methods for managing thematic content.
-- getTopic
-- getKbs
-- getDocuments
-- addAuditQuestion
-- updateAuditQuestion
-- listAuditQuestions
-- getTestRunningState
-- runTest
-- listTopics
-- getSubtopic
-- countTopics
-- countSubtopics
-- countDocuments
-- countAuditQuestions
-- countValidatedAuditQuestions
+### Search
+[Search.ts](modules/Search.ts) provides methods for searching.
+- query
+- getDocSignature
+- getDocsIds
+- countDoneRequests
+- countAnsweredDoneRequests
+- listQuestionsAsked
+- identifySpecificDocument
 
-For example:
 ```js
-let thematic = kaiStudio.thematic()
-thematic.getKbs().then(response => {
-    console.log("GET knowledge bases:")
+let search = kaiStudio.search()
+search.query("what is the history of France TV?", "userid", "", false, true).then(response => {
+    console.log("SEARCH QUERY:")
     console.log(response)
 })
 ```
@@ -152,25 +142,6 @@ For example:
 let semantic = kaiStudio.semanticGraph()
 semantic.getNodes(10,0).then(response => {
     console.log("GET NODES:")
-    console.log(response)
-})
-```
-
-### Search
-[Search.ts](modules/Search.ts) provides methods for searching.
-- search
-- getRelatedDocuments
-- countAnalyzedDocuments
-- getDocSignature
-- getDocsIds
-- countDoneRequests
-- countAnsweredDoneRequests
-- generateFollowingQuestion
-- listQuestionsAsked
-```js
-let search = kaiStudio.search()
-search.query("what is the history of France TV?", "userid").then(response => {
-    console.log("SEARCH QUERY:")
     console.log(response)
 })
 ```

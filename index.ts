@@ -1,7 +1,5 @@
-import {FileInstance} from "./modules/FileInstance";
 import {ManageInstance} from "./modules/ManageInstance";
 import {Search} from "./modules/Search";
-import {Thematic} from "./modules/Thematic";
 import {KMAudit} from "./modules/KMAudit";
 import {SemanticGraph} from "./modules/SemanticGraph";
 import {Core} from "./modules/Core";
@@ -17,9 +15,7 @@ export class KaiStudio {
 
     private readonly credentials: KaiStudioCredentials;
     private readonly _search: Search;
-    private readonly _fileInstance: FileInstance;
     private readonly _manageInstance: ManageInstance;
-    private readonly _thematic: Thematic;
     private readonly _auditInstance: KMAudit;
     private readonly _semanticGraph: SemanticGraph;
     private readonly _core: Core;
@@ -50,10 +46,8 @@ export class KaiStudio {
 
         this._search = new Search(headers, baseUrl)
         this._auditInstance = new KMAudit(headers, baseUrl)
-        this._thematic = new Thematic(headers, baseUrl)
         this._semanticGraph = new SemanticGraph(headers, baseUrl)
         this._manageInstance = new ManageInstance(headers, baseUrl)
-        this._fileInstance = new FileInstance(headers)
         this._core = new Core(headers, baseUrl)
     }
 
@@ -65,16 +59,8 @@ export class KaiStudio {
         return this._search
     }
 
-    public fileInstance(): FileInstance {
-        return this._fileInstance
-    }
-
     public manageInstance(): ManageInstance {
         return this._manageInstance
-    }
-
-    public thematic(): Thematic {
-        return this._thematic
     }
 
     public auditInstance(): KMAudit {
