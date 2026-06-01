@@ -1,6 +1,6 @@
 {
   "name": "kai-instance-api-sdk-js",
-  "version": "20260601.1.0",
+  "version": "20260601.2.0",
   "description": "TypeScript SDK for the Kai Studio API",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -11,8 +11,9 @@
   ],
   "scripts": {
     "build": "tsc",
+    "prepare": "tsc",
     "test": "jest",
-    "prepublishOnly": "npm run build && npm test"
+    "prepublishOnly": "npm test"
   },
   "repository": {
     "type": "git",
