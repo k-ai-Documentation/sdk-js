@@ -7,6 +7,8 @@ export interface RetryOptions {
 }
 
 export class HttpClient {
+  private static readonly RETRYABLE_STATUSES = new Set([502, 503, 504]);
+
   private readonly instance: AxiosInstance;
   private readonly maxRetries: number;
   private readonly retryDelay: number;
@@ -70,10 +72,8 @@ export class HttpClient {
       try {
         return await fn();
       } catch (err: unknown) {
-        const isAxErr = (err as any)?.isAxiosError === true;
-        const retryableStatus = new Set([502, 503, 504]);
-        const shouldRetry = isAxErr
-          ? (err as any).response === undefined || retryableStatus.has((err as any).response?.status)
+        const shouldRetry = axios.isAxiosError(err)
+          ? err.response === undefined || HttpClient.RETRYABLE_STATUSES.has(err.response.status)
           : false;
         if (!shouldRetry || attempt === this.maxRetries) throw err;
         await this.sleep(this.retryDelay * Math.pow(2, attempt));

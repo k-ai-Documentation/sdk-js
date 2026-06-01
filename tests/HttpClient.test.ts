@@ -19,6 +19,7 @@ function makeAxiosError(status?: number) {
 describe('HttpClient', () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    mockedAxios.isAxiosError.mockImplementation((err: any) => err?.isAxiosError === true);
   });
 
   // ── success path ──────────────────────────────────────────────────────────

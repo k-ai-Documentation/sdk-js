@@ -124,7 +124,7 @@ export class KMAudit extends BaseModule {
    * @param state - Optional state filter.
    * @returns A map of date → state → count.
    */
-  async countConflictsForPeriod(begin_date: string, end_date: string, state?: string): Promise<Record<string, Record<string, number>>> {
+  async countConflictsForPeriod(begin_date: string, end_date: string, state?: AnomalyState): Promise<Record<string, Record<string, number>>> {
     return this.post('api/audit/count-conflict-by-date', { begin_date, end_date, state });
   }
 
@@ -134,8 +134,8 @@ export class KMAudit extends BaseModule {
    * @param state - The state string to filter by (e.g. `'detected'`).
    * @returns The conflict count for that state.
    */
-  async countConflictsByState(state: string): Promise<number> {
-    return (await this.post<number>('api/audit/count-conflicts-by-state', { state })) ?? 0;
+  async countConflictsByState(state: AnomalyState): Promise<number> {
+    return this.post('api/audit/count-conflicts-by-state', { state });
   }
 
   /**
@@ -161,8 +161,10 @@ export class KMAudit extends BaseModule {
    * @param state - Optional state filter. Defaults to `''` (all states).
    * @returns Array of {@link Anomaly} objects shared between the two documents.
    */
-  async getConflictsByDocumentPair(document_ids: string[], limit: number = 200, offset: number = 0, state: string = ''): Promise<Anomaly[]> {
-    return this.post('api/audit/get-conflicts-by-document-id-pair', { document_ids, limit, offset, state });
+  async getConflictsByDocumentPair(document_ids: string[], limit: number = 200, offset: number = 0, state?: AnomalyState): Promise<Anomaly[]> {
+    const payload: Record<string, unknown> = { document_ids, limit, offset };
+    if (state !== undefined) payload.state = state;
+    return this.post('api/audit/get-conflicts-by-document-id-pair', payload);
   }
 
   /**

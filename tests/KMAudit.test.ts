@@ -92,6 +92,54 @@ describe('KMAudit', () => {
     });
   });
 
+  describe('countConflictsByState', () => {
+    it('returns the count from the API response', async () => {
+      const mockRequest = jest.fn().mockResolvedValueOnce({ data: { response: 7 } });
+      mockedAxios.create.mockReturnValue(makeMockInstance(mockRequest));
+
+      const audit = new KMAudit({}, 'https://api.example.com/');
+      const result = await audit.countConflictsByState(AnomalyState.DETECTED);
+
+      expect(result).toBe(7);
+      expect(mockRequest).toHaveBeenCalledWith(
+        expect.objectContaining({
+          url: 'api/audit/count-conflicts-by-state',
+          data: { state: AnomalyState.DETECTED },
+        })
+      );
+    });
+  });
+
+  describe('getConflictsByDocumentPair', () => {
+    it('omits state from payload when not provided', async () => {
+      const mockRequest = jest.fn().mockResolvedValueOnce({ data: { response: [] } });
+      mockedAxios.create.mockReturnValue(makeMockInstance(mockRequest));
+
+      const audit = new KMAudit({}, 'https://api.example.com/');
+      await audit.getConflictsByDocumentPair(['doc-1', 'doc-2']);
+
+      expect(mockRequest).toHaveBeenCalledWith(
+        expect.objectContaining({
+          data: expect.not.objectContaining({ state: expect.anything() }),
+        })
+      );
+    });
+
+    it('sends state when provided', async () => {
+      const mockRequest = jest.fn().mockResolvedValueOnce({ data: { response: [] } });
+      mockedAxios.create.mockReturnValue(makeMockInstance(mockRequest));
+
+      const audit = new KMAudit({}, 'https://api.example.com/');
+      await audit.getConflictsByDocumentPair(['doc-1', 'doc-2'], 10, 0, AnomalyState.MANAGED);
+
+      expect(mockRequest).toHaveBeenCalledWith(
+        expect.objectContaining({
+          data: expect.objectContaining({ state: AnomalyState.MANAGED }),
+        })
+      );
+    });
+  });
+
   describe('countConflictsByDocumentId', () => {
     it('parses the string response to an integer', async () => {
       const mockRequest = jest.fn().mockResolvedValueOnce({ data: { response: '42' } });
