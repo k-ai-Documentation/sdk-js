@@ -1,6 +1,6 @@
 {
   "name": "kai-instance-api-sdk-js",
-  "version": "20260601.3.0",
+  "version": "20260602.1.0",
   "description": "TypeScript SDK for the Kai Studio API",
   "main": "index.ts",
   "files": [
