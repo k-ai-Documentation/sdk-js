@@ -14,8 +14,6 @@ export interface KaiStudioCredentials {
   apiKey?: string;
   /** Base URL for self-hosted (Premise) deployments (e.g. `https://your-server.example.com/`). Overrides the default SaaS URL. */
   host?: string;
-  /** Authorization header value (e.g. `Bearer <token>`). */
-  Authorization?: string;
   /** Sets the `api-host` request header. */
   apiHost?: string;
 }
@@ -90,7 +88,6 @@ export class KaiInstanceApi {
     // Each credential is sent independently — callers provide only what they have
     if (credentials.instanceId) headers['instance-id'] = credentials.instanceId;
     if (credentials.apiKey) headers['api-key'] = credentials.apiKey;
-    if (credentials.Authorization) headers['Authorization'] = credentials.Authorization;
     if (credentials.apiHost) headers['api-host'] = credentials.apiHost;
 
     return headers;
